@@ -50,6 +50,6 @@ do
 	fi
 done
 
-echo "# Pre-push Git hook finished running" > $1
+echo "Pre-push Git hook finished running" 
 
 exit 0

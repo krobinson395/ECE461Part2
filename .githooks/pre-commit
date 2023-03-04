@@ -45,4 +45,4 @@ EOF
 	exit 1
 fi
 
-echo "Pre-commit Git Hook finished running!"
+echo "farting-commit Git Hook finished running!"

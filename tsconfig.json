@@ -3,10 +3,10 @@
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "build",
-    "baseUrl": "./src"
+    "baseUrl": "routes"
   },
   "include": [
-    "src/**/*.ts",
+    "routes/**/*.ts",
     "test/**/*.ts"
   ]
 }

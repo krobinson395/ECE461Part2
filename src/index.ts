@@ -3,9 +3,12 @@ import {get_urls, URL_PARSE} from './url_parser';
 import {create_logger} from './logging_setup';
 import {get_bus_factor_score} from './bus_factor/bus_factor';
 import {get_responsiveness_score} from './responsiveness_factor/responsiveness';
-
+import {create_tmp, delete_dir} from './license_score_calc/license_fs';
+import {clone_and_install} from './license_score_calc/license_util';
+const utilSync = require("node:util");
+const fs = require('fs');
 const arrayToNdjson = require('array-to-ndjson');
-
+const { execSync } = require('node:child_process');
 interface SCORE_OUT {
   URL: string;
   NetScore: number;
@@ -26,10 +29,10 @@ function net_score_formula(subscores: SCORE_OUT): number {
   // prettier-ignore
   const net_score: number =
   subscores.License * (
-    (subscores.RampUp) +
-    (subscores.Correctness) +
-    (subscores.BusFactor * 0.6) +
-    (subscores.ResponsiveMaintainer * 0.4)
+    (subscores.RampUp * 0.2) +
+    (subscores.Correctness * 0.2) +
+    (subscores.BusFactor * 0.4) +
+    (subscores.ResponsiveMaintainer * 0.2)
   );
   return net_score;
 }
@@ -53,10 +56,20 @@ async function main() {
         ResponsiveMaintainer: 0,
         License: 0,
       };
-      const license_sub_score = get_license_score(url_parse.github_repo_url);
+
+      const tmp_dir: string = await create_tmp(); 
+      const success = await clone_and_install(tmp_dir, url_parse.github_repo_url);
+
+      const pyStart = 'python3 fileCounter.py ';
+      const pyExec = pyStart.concat(tmp_dir).concat('/package');
+      execSync(pyExec);
+      var array = fs.readFileSync('info.tmp').toString().split('\n');
+      const ramp_up_sub_score = parseFloat(array[0]);
+      const correctness_sub_score = parseFloat(array[1]);
+      const license_sub_score = get_license_score(url_parse.github_repo_url, tmp_dir);
       const bus_factor_sub_score = get_bus_factor_score(
         url_parse.github_repo_url
-      );
+      );	
       const responsiveness_sub_score = get_responsiveness_score(
         url_parse.github_repo_url
       );
@@ -66,8 +79,10 @@ async function main() {
       score.ResponsiveMaintainer = Number(
         (await responsiveness_sub_score).toFixed(2)
       );
+      score.RampUp = await ramp_up_sub_score;
+      score.Correctness = await correctness_sub_score;
       score.NetScore = net_score_formula(score);
-
+      delete_dir(tmp_dir);
       return score;
     }
   );

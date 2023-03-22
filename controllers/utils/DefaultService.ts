@@ -7,7 +7,7 @@ const ServiceClass = require('./Service');
  * authenticationRequest AuthenticationRequest
  * returns String
  * */
-export const createAuthToken = ({authenticationRequest}) =>
+export const createAuthToken = (authenticationRequest: any) =>
   new Promise(async (resolve, reject) => {
     try {
       resolve(
@@ -15,7 +15,7 @@ export const createAuthToken = ({authenticationRequest}) =>
           authenticationRequest,
         })
       );
-    } catch (e) {
+    } catch (e: any) {
       reject(
         ServiceClass.rejectResponse(
           e.message || 'Invalid input',
@@ -31,7 +31,7 @@ export const createAuthToken = ({authenticationRequest}) =>
  * xAuthorization String  (optional)
  * no response value expected for this operation
  * */
-export const packageByNameDelete = ({name, xAuthorization}) =>
+export const packageByNameDelete = (name: string, xAuthorization: any) =>
   new Promise(async (resolve, reject) => {
     try {
       resolve(
@@ -40,7 +40,7 @@ export const packageByNameDelete = ({name, xAuthorization}) =>
           xAuthorization,
         })
       );
-    } catch (e) {
+    } catch (e: any) {
       reject(
         ServiceClass.rejectResponse(
           e.message || 'Invalid input',
@@ -56,7 +56,7 @@ export const packageByNameDelete = ({name, xAuthorization}) =>
  * xAuthorization String  (optional)
  * returns List
  * */
-export const packageByNameGet = ({name, xAuthorization}) =>
+export const packageByNameGet = (name: string, xAuthorization: any) =>
   new Promise(async (resolve, reject) => {
     try {
       resolve(
@@ -65,7 +65,7 @@ export const packageByNameGet = ({name, xAuthorization}) =>
           xAuthorization,
         })
       );
-    } catch (e) {
+    } catch (e:any) {
       reject(
         ServiceClass.rejectResponse(
           e.message || 'Invalid input',
@@ -83,7 +83,11 @@ export const packageByNameGet = ({name, xAuthorization}) =>
  * xAuthorization String  (optional)
  * returns List
  * */
-export const packageByRegExGet = ({regex, body, xAuthorization}) =>
+export const packageByRegExGet = (
+  regex: string,
+  body: string,
+  xAuthorization: any
+) =>
   new Promise(async (resolve, reject) => {
     try {
       resolve(
@@ -93,7 +97,7 @@ export const packageByRegExGet = ({regex, body, xAuthorization}) =>
           xAuthorization,
         })
       );
-    } catch (e) {
+    } catch (e: any) {
       reject(
         ServiceClass.rejectResponse(
           e.message || 'Invalid input',
@@ -108,7 +112,7 @@ export const packageByRegExGet = ({regex, body, xAuthorization}) =>
  * packageData PackageData
  * returns Package
  * */
-export const packageCreate = ({xAuthorization, packageData}) =>
+export const packageCreate = (xAuthorization: string, packageData: any) =>
   new Promise(async (resolve, reject) => {
     try {
       resolve(
@@ -117,7 +121,7 @@ export const packageCreate = ({xAuthorization, packageData}) =>
           packageData,
         })
       );
-    } catch (e) {
+    } catch (e: any) {
       reject(
         ServiceClass.rejectResponse(
           e.message || 'Invalid input',
@@ -133,7 +137,7 @@ export const packageCreate = ({xAuthorization, packageData}) =>
  * xAuthorization String  (optional)
  * no response value expected for this operation
  * */
-export const packageDelete = ({id, xAuthorization}) =>
+export const packageDelete = (id: string, xAuthorization: any) =>
   new Promise(async (resolve, reject) => {
     try {
       resolve(
@@ -142,7 +146,7 @@ export const packageDelete = ({id, xAuthorization}) =>
           xAuthorization,
         })
       );
-    } catch (e) {
+    } catch (e: any) {
       reject(
         ServiceClass.rejectResponse(
           e.message || 'Invalid input',
@@ -157,7 +161,7 @@ export const packageDelete = ({id, xAuthorization}) =>
  * xAuthorization String  (optional)
  * returns PackageRating
  * */
-export const packageRate = ({id, xAuthorization}) =>
+export const packageRate = (id: string, xAuthorization: any) =>
   new Promise(async (resolve, reject) => {
     try {
       resolve(
@@ -166,7 +170,7 @@ export const packageRate = ({id, xAuthorization}) =>
           xAuthorization,
         })
       );
-    } catch (e) {
+    } catch (e:any) {
       reject(
         ServiceClass.rejectResponse(
           e.message || 'Invalid input',
@@ -183,7 +187,7 @@ export const packageRate = ({id, xAuthorization}) =>
  * xAuthorization String  (optional)
  * returns Package
  * */
-export const packageRetrieve = ({id, xAuthorization}) =>
+export const packageRetrieve = (id: string, xAuthorization: any) =>
   new Promise(async (resolve, reject) => {
     try {
       resolve(
@@ -192,7 +196,7 @@ export const packageRetrieve = ({id, xAuthorization}) =>
           xAuthorization,
         })
       );
-    } catch (e) {
+    } catch (e:any) {
       reject(
         ServiceClass.rejectResponse(
           e.message || 'Invalid input',
@@ -210,7 +214,11 @@ export const packageRetrieve = ({id, xAuthorization}) =>
  * xAuthorization String  (optional)
  * no response value expected for this operation
  * */
-export const packageUpdate = ({id, packageInfo, xAuthorization}) =>
+export const packageUpdate = (
+  id: string,
+  packageInfo: any,
+  xAuthorization: any
+) =>
   new Promise(async (resolve, reject) => {
     try {
       resolve(
@@ -220,7 +228,7 @@ export const packageUpdate = ({id, packageInfo, xAuthorization}) =>
           xAuthorization,
         })
       );
-    } catch (e) {
+    } catch (e: any) {
       reject(
         ServiceClass.rejectResponse(
           e.message || 'Invalid input',
@@ -238,7 +246,11 @@ export const packageUpdate = ({id, packageInfo, xAuthorization}) =>
  * offset String Provide this for pagination. If not provided, returns the first page of results. (optional)
  * returns List
  * */
-export const packagesList = ({packageQuery, xAuthorization, offset}) =>
+export const packagesList = (
+  packageQuery: object,
+  xAuthorization: string,
+  offset: string
+) =>
   new Promise(async (resolve, reject) => {
     try {
       resolve(
@@ -248,7 +260,7 @@ export const packagesList = ({packageQuery, xAuthorization, offset}) =>
           offset,
         })
       );
-    } catch (e) {
+    } catch (e:any) {
       reject(
         ServiceClass.rejectResponse(
           e.message || 'Invalid input',
@@ -264,7 +276,7 @@ export const packagesList = ({packageQuery, xAuthorization, offset}) =>
  * xAuthorization String  (optional)
  * no response value expected for this operation
  * */
-export const registryReset = ({xAuthorization}) =>
+export const registryReset = (xAuthorization:string) =>
   new Promise(async (resolve, reject) => {
     try {
       resolve(
@@ -272,7 +284,7 @@ export const registryReset = ({xAuthorization}) =>
           xAuthorization,
         })
       );
-    } catch (e) {
+    } catch (e:any) {
       reject(
         ServiceClass.rejectResponse(
           e.message || 'Invalid input',
@@ -281,17 +293,3 @@ export const registryReset = ({xAuthorization}) =>
       );
     }
   });
-
-/* module.exports = {
-  createAuthToken,
-  packageByNameDelete,
-  packageByNameGet,
-  packageByRegExGet,
-  packageCreate,
-  packageDelete,
-  packageRate,
-  packageRetrieve,
-  packageUpdate,
-  packagesList,
-  registryReset,
-}; */

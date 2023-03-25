@@ -13,11 +13,7 @@ export const validateUrl = (url: string) => {
   }
 };
 
-export const log = (
-  message: string,
-  messageFormal: string,
-  code: number
-) => {
+export const log = (message: string, messageFormal: string, code: number) => {
   if (code == undefined) {
     code = parseInt(process.env.LOG_LEVEL!) || 0;
   }
@@ -34,8 +30,12 @@ export const log = (
   }
 };
 
-export const retrieveFunctionLogFile = () => {
+export const retrieveEnvVariables = () => {
   const logFilePath: string | undefined = process.env.LOG_FILE;
+  const mongoLink: string | undefined = process.env.MONGOURL;
+  const port: number = parseInt(process.env.PORT!) || 4000;
   const level: number = parseInt(process.env.LOG_LEVEL!) || 0!;
-  return [logFilePath, level];
+  const github: string = process.env.GITHUB_TOKEN!;
+
+  return [logFilePath, level, mongoLink, port, github];
 };

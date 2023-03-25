@@ -1,11 +1,25 @@
 require('dotenv').config();
+import {log, retrieveEnvVariables} from '../controllers/utils/misc';
+const envVars = retrieveEnvVariables();
+const [logFilePath, level, mongoLink, port, github] = envVars;
+console.log('here', logFilePath, level, mongoLink, port, github);
+if (!mongoLink) {
+  process.exit(1);
+}
+const connection: number = require('../controllers/db/database').connect(
+  envVars[1],
+  envVars[2]
+);
+connection ? 1 : process.exit(1);
+
+// Express imports
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
-const port = process.env.PORT || 4000; // Set port
-import {log} from '../controllers/utils/logger';
-
+//const port = envVars[3]; // Set port
+console.log(port);
+// retrive all environment variables
 try {
   // Backend configuration
   app.use(bodyParser.urlencoded({extended: false}));
@@ -22,10 +36,5 @@ try {
     console.log(`Server is active on Port : ${port}`);
   });
 } catch (error: any) {
-  console.log(error);
-  log(
-    'Something went wrong in the server.js file',
-    error,
-    parseInt(process.env.LOG_LEVEL!)
-  );
+  log('Soemthing went wrong in server.js', error.stack, 1);
 }

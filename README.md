@@ -1,3 +1,6 @@
+# ECE461Part2
+
+Use "git clone https://github.com/hasansultan92/ECE461Part2.git" to install this codebase
 
 # OpenAPI Generated JavaScript/Express Server
 
@@ -88,3 +91,7 @@ Future tests should be written to ensure that the response of every request sent
 
 #### models/
 Currently a concept awaiting feedback. The idea is to have the objects defined in the openapi.yaml act as models which are passed between the different modules. This will conform the programmers to interact using defined objects, rather than loosely-defined JSON objects. Given the nature of JavaScript programmers, who want to work with their own bootstrapped parameters, this concept might not work. Keeping this here for future discussion and feedback.
+
+
+### Githooks
+Githooks are now executed through husky instead of the built in git hooks for both pre-commit and pre-push actions. Change what actions they perform in the .husky folder.

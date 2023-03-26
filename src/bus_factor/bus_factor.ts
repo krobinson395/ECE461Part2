@@ -18,7 +18,6 @@ export async function get_bus_factor_score(
       score += 0.25 * (1 - 1 / number_forks);
     }
   }
-  
   globalThis.logger.info(`bus_factor score ${score}`);
   return score;
 }

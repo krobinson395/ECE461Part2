@@ -3,10 +3,10 @@
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "build",
-    "baseUrl": "./src"
+    "target": "ES6",
+    "module": "commonjs",
+    "sourceMap": true
   },
-  "include": [
-    "src/**/*.ts",
-    "test/**/*.ts"
-  ]
+  "exclude": ["node_modules", "**/*.spec.ts"],
+  "include": ["routes/**/*", "controllers/**/*"]
 }

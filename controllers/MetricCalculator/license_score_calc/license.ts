@@ -3,8 +3,7 @@ import {join} from 'path';
 import {create_tmp, delete_dir} from './license_fs';
 import {clone_and_install, check_licenses_result} from './license_util';
 
-export async function get_license_score(repo_url: string): Promise<number> {
-  const tmp_dir: string = await create_tmp();
+export async function get_license_score(repo_url: string, tmp_dir: string): Promise<number> {
   if (tmp_dir === '') {
     return 0;
   }
@@ -24,7 +23,7 @@ export async function get_license_score(repo_url: string): Promise<number> {
 
   const score = is_valid ? 1 : 0;
 
-  delete_dir(tmp_dir);
+  //delete_dir(tmp_dir);
   return score;
 }
 

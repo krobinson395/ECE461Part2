@@ -42,7 +42,7 @@ echo "\nValidating Typescript Files using gts lint:\n"
 # Check for eslint
 ESLINT="$(git rev-parse --show-toplevel)/node_modules/.bin/gts"
 
-if [[ ! -x "$ESLINT" ]]; then
+if [ ! -x "$ESLINT" ]; then
   echo "\t\033[41mPlease install ESlint\033[0m (npm i --save --save-exact --dev eslint)"
   exit 1
 fi

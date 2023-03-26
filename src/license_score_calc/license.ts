@@ -11,6 +11,8 @@ export async function get_license_score(repo_url: string): Promise<number> {
   // note: 'package' is const in local_file_creation, should move for less duplication
   const path_to_check = join(tmp_dir, 'package');
 
+  //all of the urls are passed into here
+  //however clone and install will return false if it is not a valid url otherwise it will allow it to pass through
   const success = await clone_and_install(tmp_dir, repo_url);
   if (!success) {
     globalThis.logger.info('Unable to analyze local files for licenses');

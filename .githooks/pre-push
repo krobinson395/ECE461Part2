@@ -1,4 +1,6 @@
-#!/usr/bin/env bash
+#!/bin/sh
+
+#eceprog uses dash for some reason so no bash functions for us rip
 
 # An example hook script to verify what is about to be pushed.  Called by "git
 # push" after it has checked the remote status, but before anything has been
@@ -22,10 +24,11 @@
 remote="$1"
 url="$2"
 
+echo "\starting\n"
 
 STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep '\.ts\?$')
 
-if [[ "$STAGED_FILES" = "" ]]; then
+if [ "$STAGED_FILES" = "" ]; then
   exit 0
 fi
 

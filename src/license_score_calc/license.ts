@@ -28,7 +28,6 @@ export async function get_license_score(repo_url: string): Promise<number> {
   return score;
 }
 
-
 //get_license_score().then((data: number) => {
 //  console.log(data);
 //});

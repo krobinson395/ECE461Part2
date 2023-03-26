@@ -24,11 +24,12 @@
 remote="$1"
 url="$2"
 
-echo "\starting\n"
+echo "starting\n"
 
 STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep '\.ts\?$')
 
 if [ "$STAGED_FILES" = "" ]; then
+  echo "no staged files found\n"
   exit 0
 fi
 

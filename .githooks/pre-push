@@ -23,7 +23,7 @@ remote="$1"
 url="$2"
 
 
-STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep ".ts")
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep '\.ts\?$')
 
 if [[ "$STAGED_FILES" = "" ]]; then
   exit 0

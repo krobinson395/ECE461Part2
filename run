@@ -2,6 +2,7 @@
 install_cmd() {
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
     export NVM_DIR="$HOME/.nvm"
+    export LOG_FILE=log_file.txt
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
     pip install GitPython
@@ -14,6 +15,7 @@ install_cmd() {
 
 build_cmd() {
     export NVM_DIR="$HOME/.nvm"
+    export LOG_FILE=log_file.txt
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
     nvm install v18.14.0 > /dev/null 2>&1
@@ -39,7 +41,7 @@ run_cmd() {
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
     nvm install v18.14.0 > /dev/null 2>&1
     nvm use v18.14.0 > /dev/null
-    node build/src/index.js "$1"
+    node build/routes/index.js "$1"
 }
 case "$1" in
     install)

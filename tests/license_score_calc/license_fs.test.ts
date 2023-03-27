@@ -1,11 +1,11 @@
-import {create_tmp, delete_dir} from '../../src/license_score_calc/license_fs';
+import {create_tmp, delete_dir} from '../../controllers/MetricCalculator/license_score_calc/license_fs';
 
 // imports to mock
 import * as os from 'os';
 import * as fs from 'fs/promises';
 import * as path from 'path';
 import {PathLike, RmOptions} from 'fs';
-import {create_logger} from '../../src/logging_setup';
+import {create_logger} from '../../controllers/MetricCalculator/logging_setup';
 
 create_logger();
 

@@ -1,6 +1,6 @@
-import {get_responsiveness_score} from '../../src/responsiveness_factor/responsiveness';
+import {get_responsiveness_score} from '../../controllers/MetricCalculator/responsiveness_factor/responsiveness';
 
-import {create_logger} from '../../src/logging_setup';
+import {create_logger} from '../../controllers/MetricCalculator/logging_setup';
 
 create_logger();
 

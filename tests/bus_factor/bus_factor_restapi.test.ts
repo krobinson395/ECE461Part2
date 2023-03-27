@@ -1,7 +1,7 @@
-import {get_percent_owner} from '../../src/bus_factor/bus_factor_restapi';
+import {get_percent_owner} from '../../controllers/MetricCalculator/bus_factor/bus_factor_restapi';
 import * as https from 'https';
 
-import {create_logger} from '../../src/logging_setup';
+import {create_logger} from '../../controllers/MetricCalculator/logging_setup';
 
 create_logger();
 

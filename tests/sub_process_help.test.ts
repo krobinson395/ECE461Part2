@@ -1,6 +1,6 @@
-import {run_cmd} from '../src/sub_process_help';
+import {run_cmd} from '../controllers/MetricCalculator/sub_process_help';
 import * as child_process from 'child_process';
-import {create_logger} from '../src/logging_setup';
+import {create_logger} from '../controllers/MetricCalculator/logging_setup';
 
 create_logger();
 

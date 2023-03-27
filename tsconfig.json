@@ -7,5 +7,5 @@
     "sourceMap": true
   },
   "exclude": ["node_modules", "**/*.spec.ts"],
-  "include": ["routes/**/*", "controllers/**/*"]
+  "include": ["routes/**/*", "controllers/**/*", "src/index.ts"]
 }

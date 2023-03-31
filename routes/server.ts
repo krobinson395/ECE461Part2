@@ -34,5 +34,5 @@ try {
     console.log(`Server is active on Port : ${port}`);
   });
 } catch (error: any) {
-  log('Soemthing went wrong in server.js', error.stack, level);
+  log(error, error.stack, level);
 }

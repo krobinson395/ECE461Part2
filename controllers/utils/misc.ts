@@ -19,23 +19,27 @@ export const log = (message: string, messageFormal: string, code: number) => {
   }
   if (code == 0) {
     return;
-  }
-  if (code == 1) {
+  } else if (code == 1) {
     console.log(message);
     return;
-  }
-  if (code == 2) {
+  } else if (code == 2) {
     fs.writeFileSync(process.env.LOG_FILE, `${messageFormal}\n`, {flag: 'a'});
     return;
   }
 };
 
-export const retrieveEnvVariables = () => {
+export const retrieveEnvVariables = (): any => {
   const logFilePath: string | undefined = process.env.LOG_FILE;
   const mongoLink: string | undefined = process.env.MONGOURL;
   const port: number = parseInt(process.env.PORT!) || 4000;
   const level: number = parseInt(process.env.LOG_LEVEL!) || 0!;
   const github: string = process.env.GITHUB_TOKEN!;
 
-  return [logFilePath, level, mongoLink, port, github];
+  return {
+    logFilePath,
+    level,
+    mongoLink,
+    port,
+    github,
+  };
 };

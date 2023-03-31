@@ -1,14 +1,16 @@
 /* eslint-disable no-unused-vars */
 const ServiceClass = require('./Service');
-
+const UserModel = require("../db/user-model")
 /**
  * Create an access token.
  *
  * authenticationRequest AuthenticationRequest
  * returns String
  * */
-export const createAuthToken = (authenticationRequest: any) =>
-  new Promise(async (resolve, reject) => {
+export const createAuthToken = (authenticationRequest: any) =>{
+  console.log(authenticationRequest)
+}
+ /*  new Promise(async (resolve, reject) => {
     try {
       resolve(
         ServiceClass.successResponse({
@@ -23,7 +25,7 @@ export const createAuthToken = (authenticationRequest: any) =>
         )
       );
     }
-  });
+  }); */
 /**
  * Delete all versions of this package.
  *

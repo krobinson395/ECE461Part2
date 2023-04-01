@@ -2,7 +2,7 @@ import {Request, Response} from 'express';
 import {
   CreateUser,
   createAuthToken,
-  randomFunc,
+  authenticate,
 } from '../../controllers/GeneralController';
 import {log} from '../../controllers/utils/misc';
 
@@ -16,7 +16,7 @@ module.exports = function (express: any) {
   });
 
   router.put('/authenticate', async (req: Request, res: Response) => {
-    await randomFunc(req, res);
+    await authenticate(req, res);
   });
 
   router.post('/register', async (req: Request, res: Response, next: any) => {

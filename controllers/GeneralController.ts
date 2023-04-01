@@ -6,19 +6,21 @@
  * parameters are extracted and sent to the ServiceController, and where response is handled.
  */
 
-
 import {log} from '../controllers/utils/misc';
-const UserSchema = require('./db/user-model');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-
+let UserSchema = require('./db/user-model');
+let bcrypt = require('bcryptjs');
+let jwt = require('jsonwebtoken');
 
 export const createAuthToken = async (user: any) => {
   // Create token
-  const token = jwt.sign({username: user.first_name}, process.env.TOKEN_KEY, {
-    expiresIn: '90h',
-  });
-  return token
+  const token: string = jwt.sign(
+    {username: user.first_name},
+    process.env.TOKEN_KEY,
+    {
+      expiresIn: '90h',
+    }
+  );
+  return token;
 };
 
 /* Function to create a User in the database and store their Token
@@ -45,7 +47,10 @@ export const CreateUser = async (req: any, res: any) => {
     }
 
     //Encrypt user password
-    let encryptedUserPassword = await bcrypt.hash(password, 10);
+    let encryptedUserPassword = await bcrypt.hash(
+      password,
+      process.env.SERVERKEY
+    );
 
     // Create user in our database
     const user = await UserSchema.create({
@@ -60,101 +65,94 @@ export const CreateUser = async (req: any, res: any) => {
     res.contentType('application/json');
     res.status(200).json(user);
   } catch (e: any) {
-    log(e, e, 1);
+    log(
+      'Something went wrong while creating a new user in the CreateUser Function ',
+      e.stack,
+      parseInt(process.env.LOG_LEVEL!)
+    );
     res.status(400).json('bad Req');
   }
 };
 
+export const authenticate = async (req: any, res: any) => {
+  try {
+    const {User, Secret} = req.body;
+    console.log(User, Secret, typeof User.isAdmin);
 
+    // Check the password with the database
+    const existingUser = await UserSchema.findOne({first_name: User.name});
+    console.log(existingUser);
 
-export const randomFunc = async (req: any, res: any) => {
-  const {User, Secret} = req.body;
-  console.log(User, Secret, typeof User.isAdmin);
-  // Check the password witth the database
+    if (!existingUser) {
+      // If user not found
+      res.status(400).json('bad Req');
+      return;
+    }
 
-  // create a auth token based on the is admin parameter
-  res.contentType('application/json');
-  res.json({msg: 'Hello World'});
+    // If user was found
+    const userPass: string = existingUser.password;
+
+    const match: boolean = await bcrypt.compare(Secret.password, userPass);
+    if (!match) {
+      res.status(400).json('Wrong Password');
+      return;
+    }
+
+    const token: string = await createAuthToken(existingUser);
+    // check this line
+    existingUser.token = token;
+
+    // create a auth token based on the is admin parameter
+    res.contentType('application/json');
+    res.json(token);
+  } catch (e: any) {
+    log(
+      'Something went wrong while creating a new token for the user in the Authentication function',
+      e.stack,
+      parseInt(process.env.LOG_LEVEL!)
+    );
+    res.status(400).json('bad Req');
+  }
 };
 /*
 const packageByNameDelete = async (request: any, response: any) => {
-  await ControllerClass.handleRequest(
-    request,
-    response,
-    ServiceController.packageByNameDelete
-  );
+
 };
 
 const packageByNameGet = async (request: any, response: any) => {
-  await ControllerClass.handleRequest(
-    request,
-    response,
-    ServiceController.packageByNameGet
-  );
+
 };
 
 const packageByRegExGet = async (request: any, response: any) => {
-  await ControllerClass.handleRequest(
-    request,
-    response,
-    ServiceController.packageByRegExGet
-  );
+
 };
 
 const packageCreate = async (request: any, response: any) => {
-  await ControllerClass.handleRequest(
-    request,
-    response,
-    ServiceController.packageCreate
-  );
+
 };
 
 const packageDelete = async (request: any, response: any) => {
-  await ControllerClass.handleRequest(
-    request,
-    response,
-    ServiceController.packageDelete
-  );
+
 };
 
 const packageRate = async (request: any, response: any) => {
-  await ControllerClass.handleRequest(
-    request,
-    response,
-    ServiceController.packageRate
-  );
+
 };
 
 const packageRetrieve = async (request: any, response: any) => {
-  await ControllerClass.handleRequest(
-    request,
-    response,
-    ServiceController.packageRetrieve
-  );
+
 };
 
 const packageUpdate = async (request: any, response: any) => {
-  await ControllerClass.handleRequest(
-    request,
-    response,
-    ServiceController.packageUpdate
-  );
+
 };
 
 const packagesList = async (request: any, response: any) => {
-  await ControllerClass.handleRequest(
-    request,
-    response,
-    ServiceController.packagesList
-  );
+
 };
 
 const registryReset = async (request: any, response: any) => {
-  await ControllerClass.handleRequest(
-    request,
-    response,
-    ServiceController.registryReset
-  );
+
 };
 
 */

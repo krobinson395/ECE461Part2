@@ -5,7 +5,5 @@
     "target": "ES6",
     "module": "CommonJS",
     "sourceMap": true
-  },
-  "exclude": ["node_modules", "**/*.spec.ts"],
-  "include": ["routes/**/*", "controllers/**/*", "src/index.ts"]
+  }
 }

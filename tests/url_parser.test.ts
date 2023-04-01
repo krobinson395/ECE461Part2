@@ -1,8 +1,8 @@
 import * as fs from 'fs';
 import * as readline from 'readline';
 
-import * as url_parser from '../src/url_parser';
-import {create_logger} from '../src/logging_setup';
+import * as url_parser from '../controllers//MetricCalculator/url_parser';
+import {create_logger} from '../controllers/MetricCalculator/logging_setup';
 
 create_logger();
 

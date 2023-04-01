@@ -1,5 +1,5 @@
 # Logs
-logs
+log
 *.log
 npm-debug.log*
 yarn-debug.log*
@@ -107,3 +107,4 @@ package-lock.json
 build/src
 .VSCodeCounter
 build
+openapi

@@ -1,7 +1,7 @@
-import {get_number_forks} from '../../src/bus_factor/bus_factor_graphql';
+import {get_number_forks} from '../../controllers/MetricCalculator/bus_factor/bus_factor_graphql';
 import * as https from 'https';
 
-import {create_logger} from '../../src/logging_setup';
+import {create_logger} from '../../controllers/MetricCalculator/logging_setup';
 
 create_logger();
 

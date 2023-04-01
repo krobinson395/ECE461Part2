@@ -6,10 +6,10 @@
  * parameters are extracted and sent to the ServiceController, and where response is handled.
  */
 
-import {log} from '../controllers/utils/misc';
-let UserSchema = require('./db/user-model');
-let bcrypt = require('bcryptjs');
-let jwt = require('jsonwebtoken');
+import {log} from '../../utils/misc';
+const UserSchema = require('../../database/user-model');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 export const createAuthToken = async (user: any) => {
   // Create token

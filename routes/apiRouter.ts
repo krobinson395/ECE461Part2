@@ -3,8 +3,8 @@ import {
   CreateUser,
   createAuthToken,
   authenticate,
-} from '../../controllers/GeneralController';
-import {log} from '../../controllers/utils/misc';
+} from '../controllers/API/authenticate/AuthenticateFunctions';
+import {log} from '../controllers/utils/misc';
 
 module.exports = function (express: any) {
   var router = express.Router();

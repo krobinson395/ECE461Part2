@@ -9,7 +9,7 @@ if (!mongoLink) {
   process.exit(1);
 }
 
-import {connect} from '../controllers/db/database';
+import {connect} from '../controllers/Database/database';
 const connection: number = connect(level, mongoLink);
 connection ? 1 : process.exit(1);
 
@@ -26,7 +26,7 @@ try {
   app.use(cors());
 
   //Initialize the route endpoint and modules being passed
-  const router = require('./API/apiRouter')(express);
+  const router = require('./apiRouter')(express);
   app.use('/', router);
 
   // Run the backend (magic)

@@ -108,3 +108,4 @@ build/src
 .VSCodeCounter
 build
 openapi
+.vscode

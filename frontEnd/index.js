@@ -1,4 +1,3 @@
-console.log('Server-side code running');
 
 const express = require('express');
 
@@ -6,7 +5,7 @@ const app = express();
 
 app.use(express.static('public'));
 
-app.listen(8080, () => {
+app.listen(parseInt(process.env.PORT), () => {
 	console.log('listening on 8080');
 });
 

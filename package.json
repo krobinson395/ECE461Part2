@@ -4,7 +4,7 @@
   "description": "Something to be added later",
   "author": "Hasan, Kyle, Jason",
   "license": "GNU GENERAL PUBLIC LICENSE V2.1",
-  "main": "./build/routes/server.js",
+  "main": "./frontEnd/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hasansultan92/ECE461Part2.git"

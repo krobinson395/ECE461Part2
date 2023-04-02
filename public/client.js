@@ -1,4 +1,4 @@
 function myFunction() {
-	document.getElementById("demo").innerHTML = "Continous Deployment is a hoax";
+	document.getElementById("demo").innerHTML = "Original Code";
 	console.log("Button pressed");
 }

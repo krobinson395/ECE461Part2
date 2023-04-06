@@ -1,16 +1,16 @@
 /* eslint-disable no-unused-vars */
 const ServiceClass = require('./Service');
-const UserModel = require("../db/user-model")
+const UserModel = require('../db/user-model');
 /**
  * Create an access token.
  *
  * authenticationRequest AuthenticationRequest
  * returns String
  * */
-export const createAuthToken = (authenticationRequest: any) =>{
-  console.log(authenticationRequest)
-}
- /*  new Promise(async (resolve, reject) => {
+export const createAuthToken = (authenticationRequest: any) => {
+  console.log(authenticationRequest);
+};
+/*  new Promise(async (resolve, reject) => {
     try {
       resolve(
         ServiceClass.successResponse({
@@ -67,7 +67,7 @@ export const packageByNameGet = (name: string, xAuthorization: any) =>
           xAuthorization,
         })
       );
-    } catch (e:any) {
+    } catch (e: any) {
       reject(
         ServiceClass.rejectResponse(
           e.message || 'Invalid input',
@@ -172,7 +172,7 @@ export const packageRate = (id: string, xAuthorization: any) =>
           xAuthorization,
         })
       );
-    } catch (e:any) {
+    } catch (e: any) {
       reject(
         ServiceClass.rejectResponse(
           e.message || 'Invalid input',
@@ -198,7 +198,7 @@ export const packageRetrieve = (id: string, xAuthorization: any) =>
           xAuthorization,
         })
       );
-    } catch (e:any) {
+    } catch (e: any) {
       reject(
         ServiceClass.rejectResponse(
           e.message || 'Invalid input',
@@ -262,7 +262,7 @@ export const packagesList = (
           offset,
         })
       );
-    } catch (e:any) {
+    } catch (e: any) {
       reject(
         ServiceClass.rejectResponse(
           e.message || 'Invalid input',
@@ -278,7 +278,7 @@ export const packagesList = (
  * xAuthorization String  (optional)
  * no response value expected for this operation
  * */
-export const registryReset = (xAuthorization:string) =>
+export const registryReset = (xAuthorization: string) =>
   new Promise(async (resolve, reject) => {
     try {
       resolve(
@@ -286,7 +286,7 @@ export const registryReset = (xAuthorization:string) =>
           xAuthorization,
         })
       );
-    } catch (e:any) {
+    } catch (e: any) {
       reject(
         ServiceClass.rejectResponse(
           e.message || 'Invalid input',

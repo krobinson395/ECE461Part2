@@ -1,4 +1,7 @@
-import {create_tmp, delete_dir} from '../../controllers/MetricCalculator/license_score_calc/license_fs';
+import {
+  create_tmp,
+  delete_dir,
+} from '../../controllers/MetricCalculator/license_score_calc/license_fs';
 
 // imports to mock
 import * as os from 'os';

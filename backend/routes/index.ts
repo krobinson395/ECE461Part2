@@ -3,14 +3,16 @@ import {get_urls, URL_PARSE} from '../controllers/MetricCalculator/url_parser';
 import {create_logger} from '../controllers/MetricCalculator/logging_setup';
 import {get_bus_factor_score} from '../controllers/MetricCalculator/bus_factor/bus_factor';
 import {get_responsiveness_score} from '../controllers/MetricCalculator/responsiveness_factor/responsiveness';
-import {create_tmp, delete_dir} from '../controllers/MetricCalculator/license_score_calc/license_fs';
+import {
+  create_tmp,
+  delete_dir,
+} from '../controllers/MetricCalculator/license_score_calc/license_fs';
 import {clone_and_install} from '../controllers/MetricCalculator/license_score_calc/license_util';
 
-
-const utilSync = require("node:util");
+const utilSync = require('node:util');
 const fs = require('fs');
 const arrayToNdjson = require('array-to-ndjson');
-const { execSync } = require('node:child_process');
+const {execSync} = require('node:child_process');
 interface SCORE_OUT {
   URL: string;
   NetScore: number;
@@ -59,19 +61,25 @@ async function main() {
         License: 0,
       };
 
-      const tmp_dir: string = await create_tmp(); 
-      const success = await clone_and_install(tmp_dir, url_parse.github_repo_url);
+      const tmp_dir: string = await create_tmp();
+      const success = await clone_and_install(
+        tmp_dir,
+        url_parse.github_repo_url
+      );
 
       const pyStart = 'python3 fileCounter.py ';
       const pyExec = pyStart.concat(tmp_dir).concat('/package');
       execSync(pyExec);
-      var array = fs.readFileSync('info.tmp').toString().split('\n');
+      const array = fs.readFileSync('info.tmp').toString().split('\n');
       const ramp_up_sub_score = parseFloat(array[0]);
       const correctness_sub_score = parseFloat(array[1]);
-      const license_sub_score = get_license_score(url_parse.github_repo_url, tmp_dir);
+      const license_sub_score = get_license_score(
+        url_parse.github_repo_url,
+        tmp_dir
+      );
       const bus_factor_sub_score = get_bus_factor_score(
         url_parse.github_repo_url
-      );	
+      );
       const responsiveness_sub_score = get_responsiveness_score(
         url_parse.github_repo_url
       );

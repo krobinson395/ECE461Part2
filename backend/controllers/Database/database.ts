@@ -3,7 +3,7 @@ import {log} from '../utils/misc';
 
 export const connect = (logLevel: number, MongoUrl: string): number => {
   // Connecting to the database
-  let returnVal: number = 0; // Default value needs to be zero
+  let returnVal = 0; // Default value needs to be zero
   try {
     mongoose.connect(MongoUrl, {
       useNewUrlParser: true,

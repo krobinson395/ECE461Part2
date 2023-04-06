@@ -3,7 +3,10 @@ import {join} from 'path';
 import {create_tmp, delete_dir} from './license_fs';
 import {clone_and_install, check_licenses_result} from './license_util';
 
-export async function get_license_score(repo_url: string, tmp_dir: string): Promise<number> {
+export async function get_license_score(
+  repo_url: string,
+  tmp_dir: string
+): Promise<number> {
   if (tmp_dir === '') {
     return 0;
   }

@@ -47,7 +47,7 @@ export const CreateUser = async (req: any, res: any) => {
     }
 
     //Encrypt user password
-    let encryptedUserPassword = await bcrypt.hash(
+    const encryptedUserPassword = await bcrypt.hash(
       password,
       process.env.SERVERKEY
     );

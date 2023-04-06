@@ -7,9 +7,8 @@ import {
 import {log} from '../controllers/utils/misc';
 
 module.exports = function (express: any) {
-  var router = express.Router();
+  const router = express.Router();
 
-  
   router.post('/testFunction', (req: Request, res: Response) => {
     console.log('hello');
     res.json({msg: 'Hello World'});

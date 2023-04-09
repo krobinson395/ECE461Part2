@@ -1,15 +1,30 @@
-document.getElementById("login-button").addEventListener("submit", function(event) {
+document.getElementById("login-form").addEventListener("submit", function(event) {
 	event.preventDefault();
 
 	var username = document.getElementById("username").value;
 	var header = document.getElementById("welcome-header");
 	if(header) {
-		header.textContent = "Welcome " + username + "to Ver 3";
+		if(event.submitter.name === "register-submit")
+		{
+			header.textContent = "Welcome New User!"
+		}
+		else
+		{
+			header.textContent = "Welcome " + username + "!";
+		}
 	}
 	else {
 		header = document.createElement("h1");
 		header.setAttribute("id", "welcome-header");
-		var text = document.createTextNode("Welcome " + username);
+		var text;
+		if(event.submitter.name === "register-submit")
+		{
+			text = document.createTextNode("Welcome New User!");
+		}
+		else
+		{
+			text = document.createTextNode("Welcome " + username + "!");
+		}
 		header.appendChild(text);
 		document.getElementById("welcome-message").appendChild(header);
 	}
@@ -17,21 +32,6 @@ document.getElementById("login-button").addEventListener("submit", function(even
 	document.getElementById("password").value = "";
 });
 
-document.getElementById("register-button").addEventListener("submit", function(event) {
-	event.preventDefault();
-
-	var header = document.getElementById("welcome-header");
-	if(header) {
-		header.textContent = "Welcome New User!";
-	}
-	else {
-		header = document.createElement("h1");
-		header.setAttribute("id", "welcome-header");
-		var text = document.createTextNode("Welcome New User!");
-		header.appendChild(text);
-		document.getElementById("welcome-message").appendChild(header);
-	}
-});
 
 document.getElementById("ingestion-form").addEventListener("submit", function(event) {
 	event.preventDefault();

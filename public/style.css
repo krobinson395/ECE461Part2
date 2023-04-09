@@ -9,7 +9,7 @@ input[type=submit] {
 	background-color: #4CAF50;
 	color: white;
 }
-button[type=button] {
+button[type=submit] {
 	background-color: #4CAF50;
 	color: white;
 	border: 1px solid #ccc;

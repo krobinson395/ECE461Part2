@@ -11,7 +11,7 @@ document.getElementById("login-form").addEventListener("submit", function(event)
 document.getElementById("ingestion-form").addEventListener("submit", function(event) {
 	event.preventDefault();
 	var ingestionUrl = document.getElementById("ingestion-url").value;
-	console.log("Ingestion URL: " + ingestionURL);
+	console.log("Ingestion URL: " + ingestionUrl);
 
 	var message = document.createElement("p");
 	var text = document.createTextNode("ingesting URL");

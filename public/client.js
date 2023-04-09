@@ -6,7 +6,7 @@ document.getElementById("login-form").addEventListener("submit", function(event)
 	if(header) {
 		if(event.submitter.name === "register-submit")
 		{
-			header.textContent = "Welcome New User!"
+			header.textContent = "Welcome New User to Ver4!"
 		}
 		else
 		{
@@ -19,7 +19,7 @@ document.getElementById("login-form").addEventListener("submit", function(event)
 		var text;
 		if(event.submitter.name === "register-submit")
 		{
-			text = document.createTextNode("Welcome New User!");
+			text = document.createTextNode("Welcome New User to Ver4!");
 		}
 		else
 		{

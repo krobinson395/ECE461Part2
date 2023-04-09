@@ -1,13 +1,9 @@
-function formdata()
-{
+document.getElementById("login-form").addEventListener("submit", function(event) {
+	event.preventDefault();
 
-	var usr = document.getElementById("username").value;
-	var pswd = document.getElementById("password").value;
-	console.log("Username: " + usr);
-	console.log("Passowrd: " + pswd);
-	document.writeIn("<h1>Confirmation Page</h1><br>");
-	document.writeIn("You submitted the form!<br><br>");
-	document.writeIn("Your username is " + usr + "<br>");
-	document.writeIn("Your password is " + pswd + "<br>");
-}
-
+	var username = document.getElementById("username").value;
+	var header = document.createElement("h1");
+	var text = document.createTextNode("Welcome " + username);
+	header.appendChild(text);
+	document.body.appendChild(header);
+});

@@ -1,6 +1,22 @@
-<form><br>
-Enter your Username: <input type="text" id="username"/><br><br>
-Enter your Password: <input type="text" id="password"/><br><br>
-<input type="submit" value="Submit" onclick="formdata()"/><br>
-</form>
-<script src="client.js"></script>
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Temp Login Form</title>
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<div class="container">
+			<form id="login-form">
+				<label for="username">Username:</label>
+				<input type="text" id="username" placeholder="Enter username" required>
+
+				<label for="password">Password:</label>
+				<input type="password" id="password" placeholder="Enter password" minlength="7" required>
+
+				<input type="submit" value="Submit">
+			</form>
+		</div>
+		<script src="client.js"></script>
+	</body>
+</html>
+

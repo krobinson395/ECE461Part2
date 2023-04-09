@@ -1,0 +1,18 @@
+input[type=text], input[type=password], input[type=submit] {
+	padding: 12px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+input[type=submit] {
+	background-color: #4CAF50;
+	color: white;
+}
+
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+}

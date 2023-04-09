@@ -1,5 +1,4 @@
-document.getElementById("login-form").addEventListener("submit", function(event) {
-	event.preventDefault();
+document.getElementById("login-button").addEventListener("click", function() {
 
 	var username = document.getElementById("username").value;
 	var header = document.getElementById("welcome-header");
@@ -15,6 +14,21 @@ document.getElementById("login-form").addEventListener("submit", function(event)
 	}
 	document.getElementById("username").value = "";
 	document.getElementById("password").value = "";
+});
+
+document.getElementById("register-button").addEventListener("click", function() {
+
+	var header = document.getElementById("welcome-header");
+	if(header) {
+		header.textContent = "Welcome New User!";
+	}
+	else {
+		header = document.createElement("h1");
+		header.setAttribute("id", "welcome-header");
+		var text = document.createTextNode("Welcome New User!");
+		header.appendChild(text);
+		document.getElementById("welcome-message").appendChild(header);
+	}
 });
 
 document.getElementById("ingestion-form").addEventListener("submit", function(event) {

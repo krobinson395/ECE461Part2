@@ -4,6 +4,7 @@ document.getElementById("login-form").addEventListener("submit", function(event)
 	var username = document.getElementById("username").value;
 	var header = document.getElementById("welcome-header");
 	if(header) {
+		console.log(event.submitter.name);
 		if(event.submitter.name === "register-submit")
 		{
 			header.textContent = "Welcome New User to Ver4!"
@@ -17,6 +18,7 @@ document.getElementById("login-form").addEventListener("submit", function(event)
 		header = document.createElement("h1");
 		header.setAttribute("id", "welcome-header");
 		var text;
+		console.log(event.submitter.name);
 		if(event.submitter.name === "register-submit")
 		{
 			text = document.createTextNode("Welcome New User to Ver4!");

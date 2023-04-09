@@ -9,6 +9,10 @@ input[type=submit] {
 	background-color: #4CAF50;
 	color: white;
 }
+input[type=button] {
+	background-color: #4CAF50;
+	color: white;
+}
 
 .container {
 	display: flex;

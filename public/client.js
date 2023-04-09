@@ -5,5 +5,16 @@ document.getElementById("login-form").addEventListener("submit", function(event)
 	var header = document.createElement("h1");
 	var text = document.createTextNode("Welcome " + username);
 	header.appendChild(text);
-	document.body.appendChild(header);
+	document.getElementById("welcome-message").appendChild(header);
+});
+
+document.getElementById("ingestion-form").addEventListener("submit", function(event) {
+	event.preventDefault();
+	var ingestionUrl = document.getElementById("ingestion-url").value;
+	console.log("Ingestion URL: " + ingestionURL);
+
+	var message = document.createElement("p");
+	var text = document.createTextNode("ingesting URL");
+	message.appendChild(text);
+	document.getElementById("ingestion-form").appendChild(message);
 });

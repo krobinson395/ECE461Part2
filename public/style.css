@@ -16,3 +16,7 @@ input[type=submit] {
 	align-items: center;
 	flex-direction: row;
 }
+label[for="ingestion-url"] {
+	display: block;
+	margin-top: 20px;
+}

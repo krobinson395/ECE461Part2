@@ -14,7 +14,7 @@ document.getElementById("login-form").addEventListener("submit", function(event)
 		document.getElementById("welcome-message").appendChild(header);
 	}
 	document.getElementById("username").value = "";
-	document.getElementById("password").value = "":
+	document.getElementById("password").value = "";
 });
 
 document.getElementById("ingestion-form").addEventListener("submit", function(event) {

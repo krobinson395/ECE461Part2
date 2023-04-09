@@ -27,6 +27,15 @@
 				<input type="submit" value="Submit">
 			</form>
 		</div>
+		<div class="container">
+			<form id="search-form">
+				<label for="search-box">Search Ingested Packages:</label>
+				<input type="text" id="search-box" name="search-box" placeholder="Enter Package Name or Regex Pattern" required>
+				<input type="submit" value="Search">
+				<button type="button" id="list-all">List All</button>
+			</form>
+		</div>
+		<div id="search-message"></div>
 
 		<script src="client.js"></script>
 

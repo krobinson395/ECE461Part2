@@ -45,3 +45,38 @@ document.getElementById("ingestion-form").addEventListener("submit", function(ev
 	document.getElementById("ingestion-form").appendChild(message);
 	document.getElementById("ingestion-url").value ="";
 });
+
+document.getElementById("search-form").addEventListener("submit", function(event) {
+	event.preventDefault();
+	var searchCommand = document.getElementById("search-box").value;
+	var searchMessage = document.getElementById("search-message");
+	if(searchMessage)
+	{
+		searchMessage.textContent = "You searched for " + searchCommand;
+	}
+	else
+	{
+		searchMessage = document.createElement("p");
+		searchMessage.setAttribute("id", "search-message");
+		var text = document.createTextNode("You searched for " + searchCommand);
+		searchMessage.appendChild(text);
+		document.getElementById("search-message").appendChild(searchMessage);
+	}
+	document.getElementById("search-box").value = "";
+});
+
+document.getElementById("list-all").addEventListener("click", function() {
+	var msg = document.getElementById("search-message");
+	if(msg)
+	{
+		msg.textContent = "You requested a list of all packages";
+	}
+	else
+	{
+		msg = document.createElement("p");
+		msg.setAttribute("id", "search-message");
+		var text = document.createTextNode("You requested a list of all packages");
+		msg.appendChild(text);
+		document.getElementById("search-message").appendChild(searchMessage);
+	}
+});

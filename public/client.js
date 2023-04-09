@@ -1,4 +1,5 @@
-document.getElementById("login-button").addEventListener("click", function() {
+document.getElementById("login-button").addEventListener("submit", function(event) {
+	event.preventDefault();
 
 	var username = document.getElementById("username").value;
 	var header = document.getElementById("welcome-header");
@@ -16,7 +17,8 @@ document.getElementById("login-button").addEventListener("click", function() {
 	document.getElementById("password").value = "";
 });
 
-document.getElementById("register-button").addEventListener("click", function() {
+document.getElementById("register-button").addEventListener("submit", function(event) {
+	event.preventDefault();
 
 	var header = document.getElementById("welcome-header");
 	if(header) {

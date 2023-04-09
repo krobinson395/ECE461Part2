@@ -9,9 +9,12 @@ input[type=submit] {
 	background-color: #4CAF50;
 	color: white;
 }
-input[type=button] {
+button[type=button] {
 	background-color: #4CAF50;
 	color: white;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
 }
 
 .container {

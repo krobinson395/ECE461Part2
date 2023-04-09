@@ -4,7 +4,7 @@ document.getElementById("login-form").addEventListener("submit", function(event)
 	var username = document.getElementById("username").value;
 	var header = document.getElementById("welcome-header");
 	if(header) {
-		header.textContent = "Welcome " + username;
+		header.textContent = "Welcome " + username + "to Ver 3";
 	}
 	else {
 		header = document.createElement("h1");

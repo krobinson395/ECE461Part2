@@ -2,12 +2,14 @@
 <html>
   <head>
     <meta charset = "utf-8">
-    <title>Basic Button Test</title>
+    <title>Webform test</title>
   </head>
   <body>
-	  <h1>Test After Push</h1>
-	  <button id="myButton" type="button" onclick="myFunction()">Click me!</button>
-	  <p id="demo">"Test 2"</p>
-	  <script src='client.js'></script>
+	<form action="/url" method="GET">	  
+	  <p>Username: </p>
+	  <input type="text" name="username" minlength="3">
+	  <button type="submit">Submit</button>
+	 </form>
+
   </body>
 </html>

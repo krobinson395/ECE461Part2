@@ -24,6 +24,10 @@ button[type=submit], button[type=button] {
 	align-items: center;
 	flex-direction: row;
 }
+
+.center {
+	align-text:center;
+}
 label[for="ingestion-url"] {
 	display: block;
 	margin-top: 20px;

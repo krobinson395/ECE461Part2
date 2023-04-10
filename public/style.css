@@ -28,7 +28,4 @@ button[type=submit], button[type=button] {
 .center {
 	text-align:center;
 }
-label[for="ingestion-url"] {
-	display: block;
-	margin-top: 20px;
-}
+

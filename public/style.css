@@ -6,11 +6,11 @@ input[type=text], input[type=password], input[type=submit] {
 }
 
 input[type=submit] {
-	background-color: #4CAF51;
+	background-color: #4B0083;
 	color: white;
 }
 button[type=submit], button[type=button] {
-	background-color: #4CAF51;
+	background-color: #4B0083;
 	color: white;
 	border: 1px solid #ccc;
 	border-radius: 4px;

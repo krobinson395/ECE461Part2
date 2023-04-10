@@ -38,11 +38,19 @@ document.getElementById("login-form").addEventListener("submit", function(event)
 document.getElementById("ingestion-form").addEventListener("submit", function(event) {
 	event.preventDefault();
 	var ingestionUrl = document.getElementById("ingestion-url").value;
-
-	var message = document.createElement("p");
-	var text = document.createTextNode("ingesting URL");
-	message.appendChild(text);
-	document.getElementById("ingestion-form").appendChild(message);
+	var statusCheck = document.getElementById("ingest-status");
+	if(statusCheck)
+	{
+		statusCheck.textContent = "Processing URL";
+	}
+	else
+	{
+		statusCheck = document.createElement("p");
+		statusCheck.setAttribute("id", "ingest-status");
+		var text = document.createTextNode("Processing URL");
+		statusCheck.appendChild(text);
+		document.getElementById("ingest-status").appendChild(statusCheck);
+	}
 	document.getElementById("ingestion-url").value ="";
 });
 

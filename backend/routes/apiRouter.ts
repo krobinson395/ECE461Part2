@@ -21,6 +21,9 @@ module.exports = function (express: any) {
   router.post('/register', async (req: Request, res: Response, next: any) => {
     await CreateUser(req, res);
   });
+ /* router.get('/', (req: Request, res: Response) => {
+	  res.sendFile(__dirname + "/public/index.html");
+  });*/
 
   return router;
 };

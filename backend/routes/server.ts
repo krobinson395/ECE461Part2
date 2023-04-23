@@ -1,8 +1,8 @@
 require('dotenv').config();
 import {log, retrieveEnvVariables} from '../controllers/utils/misc';
 const envVars: any = retrieveEnvVariables();
-const {logFilePath, level, mongoLink, port, github} = envVars; // retrive all environment variables
-//console.log('here', logFilePath, typeof level, mongoLink, port);
+const {logFilePath, level, mongoLink, port, webport, github} = envVars; // retrive all environment variables
+//console.log('here', logFilePath, typeof level, mongoLink, port, webport);
 
 if (!mongoLink) {
   log('URL for mongoDB not found', 'URL for mongoDB not found', level);
@@ -28,11 +28,16 @@ try {
   //Initialize the route endpoint and modules being passed
   const router = require('./apiRouter')(express);
   app.use('/', router);
-
+  app.use(express.static('public'));
   // Run the backend (magic)
   const server = app.listen(port, (req: any, res: any) => {
     console.log(`Server is active on Port : ${port}`);
   });
+
+  app.get('/', (req: any, res: any) => {
+	  res.sendFile(__dirname + "/index.html");
+  });
+
 } catch (error: any) {
   console.error(error)
   log(error, error.stack, level);

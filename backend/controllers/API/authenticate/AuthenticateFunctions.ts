@@ -11,10 +11,16 @@ const UserSchema = require('../../database/user-model');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+export const isAuthValid = (token: string): boolean => {
+  // @TODO add functionality to decrypt the token and then compare with the Hashed password in the database
+  // Return false if the token is expired or if the token was fake
+  return true;
+};
+
 export const createAuthToken = async (user: any) => {
   // Create token
   const token: string = jwt.sign(
-    {username: user.first_name},
+    {name: user.name},
     process.env.TOKEN_KEY,
     {
       expiresIn: '90h',
@@ -27,11 +33,11 @@ export const createAuthToken = async (user: any) => {
 Token is valid for 90 Hours as of yet */
 export const CreateUser = async (req: any, res: any) => {
   try {
-    const {username, password} = req.body;
+    const {username, password, isAdmin} = req.body;
     // @TODO Validate User input
     // create a auth token based on the is admin parameter
 
-    console.log(username, password);
+    //console.log(username, password);
     // Check the password witth the database
     if (!(username && password)) {
       res.status(400).send('No valid input was sent');
@@ -39,7 +45,7 @@ export const CreateUser = async (req: any, res: any) => {
 
     // check if user already exist
     // Validate if user exist in our database
-    const oldUser = await UserSchema.findOne({first_name: username});
+    const oldUser = await UserSchema.findOne({name: username});
 
     if (oldUser) {
       res.status(400).send('User Already Exist. Please Login');
@@ -47,24 +53,26 @@ export const CreateUser = async (req: any, res: any) => {
     }
 
     //Encrypt user password
-    const encryptedUserPassword = await bcrypt.hash(
+    const encryptedUserPassword = await bcrypt.hashSync(
       password,
-      process.env.SERVERKEY
+      parseInt(process.env.SERVERKEY!)
     );
-
+    //console.log(encryptedUserPassword)
     // Create user in our database
     const user = await UserSchema.create({
-      first_name: username,
+      name: username,
       password: encryptedUserPassword,
     });
 
     // save user token
     user.token = await createAuthToken(user);
-
+    console.log(user.token)
+    await user.save()
     // return new user
     res.contentType('application/json');
     res.status(200).json(user);
   } catch (e: any) {
+    console.log(e)
     log(
       'Something went wrong while creating a new user in the CreateUser Function ',
       e.stack,
@@ -80,7 +88,7 @@ export const authenticate = async (req: any, res: any) => {
     console.log(User, Secret, typeof User.isAdmin);
 
     // Check the password with the database
-    const existingUser = await UserSchema.findOne({first_name: User.name});
+    const existingUser = await UserSchema.findOne({name: User.name});
     console.log(existingUser);
 
     if (!existingUser) {
@@ -101,11 +109,12 @@ export const authenticate = async (req: any, res: any) => {
     const token: string = await createAuthToken(existingUser);
     // check this line
     existingUser.token = token;
-
+    await existingUser.save()
     // create a auth token based on the is admin parameter
     res.contentType('application/json');
     res.json(token);
   } catch (e: any) {
+    console.log(e)
     log(
       'Something went wrong while creating a new token for the user in the Authentication function',
       e.stack,

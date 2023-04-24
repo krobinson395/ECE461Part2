@@ -1,16 +1,56 @@
+async function registerUser(username, password)  {
+	var raw = "{\n   \"username\": \"" + username + "\",\n \"password\":\"" + password + "\",\n \"isAdmin\":true}\n";
+
+	var requestOptions = {
+		method: 'POST',
+		body: raw,
+		headers: new Headers({'content-type': 'application/json'}),
+		redirect: 'follow'
+	};
+	console.log("Registering User");
+	fetch("http://104.198.158.42:8080/register", requestOptions)
+	.then(response => response.text())
+	.then(result => console.log(result))
+	.catch(error => console.log(error));
+
+	
+	//return [result, error];
+}
+async function userLogin(username, password)  {
+	var raw = "{\n    \"User\": {\n    \"name\": \"" + username + "\",\n   \"isAdmin\": true\n},\n \"Secret\": {\n   \"password\": \"" + password  + "\"\n  }\n }";
+	var requestOptions = {
+		method: 'PUT',
+		body: raw,
+		headers: new Headers({'content-type': 'application/json'}),
+		redirect: 'follow'
+	};
+	console.log("Logging in User");
+	fetch("http://104.198.158.42:8080/authenticate", requestOptions)
+	.then(response => response.text())
+	.then(result => console.log(result))
+	.catch(error => console.log('error', error));
+
+	//return [result, error];
+}
+
 document.getElementById("login-form").addEventListener("submit", function(event) {
 	event.preventDefault();
 
 	var username = document.getElementById("username").value;
+	var password = document.getElementById("password").value;
 	var header = document.getElementById("welcome-header");
 	if(header) {
 		console.log(event.submitter.name);
 		if(event.submitter.name === "register-button")
-		{
+		{     
+			registerUser(username, password);
+
 			header.textContent = "Welcome New User to Ver4!"
 		}
 		else
 		{
+			userLogin(username, password);
+
 			header.textContent = "Welcome " + username + "!";
 		}
 	}
@@ -21,10 +61,12 @@ document.getElementById("login-form").addEventListener("submit", function(event)
 		console.log(event.submitter.name);
 		if(event.submitter.name === "register-button")
 		{
+			registerUser(username, password);
 			text = document.createTextNode("Welcome New User to Ver4!");
 		}
 		else
 		{
+			userLogin(username, password);
 			text = document.createTextNode("Welcome " + username + "!");
 		}
 		header.appendChild(text);

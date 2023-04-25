@@ -10,11 +10,63 @@ async function registerUser(username, password)  {
 	console.log("Registering User");
 	fetch("http://104.198.158.42:8080/register", requestOptions)
 	.then(response => response.text())
-	.then(result => console.log(result))
-	.catch(error => console.log(error));
+	.then(result => setRegisterUserInfo(result))
+	.catch(error => regUserErrorHandle(error));
 
 	
 	//return [result, error];
+}
+async function regUserErrorHandle(error) {
+	var header = document.getElementById("welcome-header");
+	var errorText;
+	if(error == 'No valid input was sent')
+	{
+		text = "Please enter valid username and password to register!"
+	}
+	else if(error == 'bad Req')
+	{
+		text = "There was an error on the server!!"
+	}
+	else
+	{
+		text = error;
+	}
+	if(header) {
+		header.textContent = text;
+		document.getElementById("welcome-message").style.color = "red";
+	}
+	else {
+		header = document.createElement("h1");
+		header.setAttribute("id", "welcome-header");
+		var textNode = document.createTextNode(text);
+		header.appendChild(textNode);
+		document.getElementById("welcome-message").appendChild(header)
+		document.getElementById("welcome-message").style.color = "red";
+	}
+}
+async function setRegisterUserInfo(result)  {
+	console.log(result);
+	try {
+		responseBody = JSON.parse(result);
+	}
+	catch(err)
+	{
+		throw result;
+	}
+	window.token = responseBody.token;
+	window.globalUsername = responseBody.name;
+	console.log(responseBody.name);
+	var header = document.getElementById("welcome-header");
+	if(header) {
+		header.textContent = "Thanks for registering " + window.globalUsername + "!";
+	}
+	else {
+		header = document.createElement("h1");
+		header.setAttribute("id", "welcome-header");
+		var text = document.createTextNode("Thanks for registering " + window.globalUsername + "!");
+		header.appendChild(text);
+		document.getElementById("welcome-message").appendChild(header);
+	}
 }
 async function userLogin(username, password)  {
 	var raw = "{\n    \"User\": {\n    \"name\": \"" + username + "\",\n   \"isAdmin\": true\n},\n \"Secret\": {\n   \"password\": \"" + password  + "\"\n  }\n }";
@@ -27,51 +79,79 @@ async function userLogin(username, password)  {
 	console.log("Logging in User");
 	fetch("http://104.198.158.42:8080/authenticate", requestOptions)
 	.then(response => response.text())
-	.then(result => console.log(result))
-	.catch(error => console.log('error', error));
+	.then(result => setLogInUserInfo(result, username))
+	.catch(error => logInErrorHandling(error));
 
 	//return [result, error];
 }
 
+async function setLogInUserInfo(result, username) {
+	console.log(result);
+	if(result == '"bad Req No User"' || result == '"Wrong Password"')
+	{
+		logInErrorHandling("Incorrect username/password");
+	}
+	else if(result == '"bad Req"')
+	{
+		logInErrorHandling("Server Error!!");
+	}
+	else
+	{
+		window.token = result;
+		window.globalUsername = username;
+		var header = document.getElementById("welcome-header");
+		if(header) {
+			header.textContent = "Welcome back " + window.globalUsername + "!";
+		}
+		else
+		{
+			header = document.createElement("h1");
+			header.setAttribute("id", "welcome-header");
+			var text = document.createTextNode("Welcome back " + window.globalUsername + "!");
+			header.appendChild(text);
+			document.getElementById("welcome-message").appendChild(header);
+		}
+	}
+
+}
+
+async function logInErrorHandling(error)
+{
+	var header = document.getElementById("welcome-header");
+	if(header) {
+		header.textContent = error;
+	}
+	else
+	{
+		header = document.createElement("h1");
+		header.setAttribute("id", "welcome-header");
+		var text = document.createTextNode(error);
+		header.appendChild(text);
+		document.getElementById("welcome-message").appendChild(header);
+	}
+	document.getElementById("welcome-message").style.color = "red";
+}
 document.getElementById("login-form").addEventListener("submit", function(event) {
 	event.preventDefault();
 
 	var username = document.getElementById("username").value;
 	var password = document.getElementById("password").value;
-	var header = document.getElementById("welcome-header");
-	if(header) {
-		console.log(event.submitter.name);
-		if(event.submitter.name === "register-button")
-		{     
-			registerUser(username, password);
+	//var header = document.getElementById("welcome-header");
+	document.getElementById("welcome-message").style.color = 'black';
+	console.log(event.submitter.name);
+	if(event.submitter.name === "register-button")
+	{     
+		registerUser(username, password);
 
-			header.textContent = "Welcome New User to Ver4!"
-		}
-		else
-		{
-			userLogin(username, password);
+		//header.textContent = "Welcome New User to Ver4!"
+	}
+	else
+	{
+		userLogin(username, password);
 
-			header.textContent = "Welcome " + username + "!";
-		}
+		//header.textContent = "Welcome " + username + "!";
 	}
-	else {
-		header = document.createElement("h1");
-		header.setAttribute("id", "welcome-header");
-		var text;
-		console.log(event.submitter.name);
-		if(event.submitter.name === "register-button")
-		{
-			registerUser(username, password);
-			text = document.createTextNode("Welcome New User to Ver4!");
-		}
-		else
-		{
-			userLogin(username, password);
-			text = document.createTextNode("Welcome " + username + "!");
-		}
-		header.appendChild(text);
-		document.getElementById("welcome-message").appendChild(header);
-	}
+	
 	document.getElementById("username").value = "";
 	document.getElementById("password").value = "";
 });
